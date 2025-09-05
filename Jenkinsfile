@@ -6,7 +6,7 @@ pipeline {
         // ===== FRONTEND BUILD =====
         stage('Build Frontend') {
             steps {
-                dir('FRONTEND/onlineartgallery') {
+                dir('FRONTEND\\onlineartgallery') {
                     bat 'npm install'
                     bat 'npm run build'
                 }
@@ -21,7 +21,7 @@ pipeline {
                     rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\reactonlineart"
                 )
                 mkdir "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\reactonlineart"
-                xcopy /E /I /Y FRONTEND/onlineartgallery\\dist\\* "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\reactonlineart"
+                xcopy /E /I /Y FRONTEND\\onlineartgallery\\dist\\* "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\reactonlineart"
                 '''
             }
         }
@@ -29,7 +29,7 @@ pipeline {
         // ===== BACKEND BUILD =====
         stage('Build Backend') {
             steps {
-                dir('BACKEND/OnlineArt') {
+                dir('BACKEND\\OnlineArt') {
                     bat 'mvn clean package'
                 }
             }
@@ -45,7 +45,7 @@ pipeline {
                 if exist "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\apionlineart" (
                     rmdir /S /Q "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\apionlineart"
                 )
-                copy "BACKEND/OnlineArt\\target\\*.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\"
+                copy "BACKEND\\OnlineArt\\target\\*.war" "C:\\Program Files\\Apache Software Foundation\\Tomcat 10.1\\webapps\\"
                 '''
             }
         }
