@@ -1,0 +1,10 @@
+package com.art.service;
+
+import java.util.List;
+import com.art.model.Art;
+
+public interface ArtService {
+    Art addArt(Art art);
+    List<Art> viewArt();
+    boolean deleteArt(Integer id);
+}

@@ -1,0 +1,50 @@
+package com.art.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.*;
+import org.springframework.web.bind.annotation.*;
+
+import com.art.model.Art;
+import com.art.service.ArtService;
+
+@RestController
+@RequestMapping("/art")
+@CrossOrigin(origins = "*")
+public class ArtController {
+
+    @Autowired
+    private ArtService artService;
+
+    @GetMapping("/")
+    public ResponseEntity<String> home() {
+        return ResponseEntity.ok("Art Home Page");
+    }
+
+    // ➕ Add new Art
+    @PostMapping
+    public ResponseEntity<Art> addArt(@RequestBody Art art) {
+        Art savedArt = artService.addArt(art);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedArt);
+    }
+
+    // 👀 View all Art
+    @GetMapping
+    public ResponseEntity<List<Art>> viewArt() {
+        List<Art> arts = artService.viewArt();
+        return ResponseEntity.ok(arts);
+    }
+
+    // ❌ Delete Art by ID
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteArt(@PathVariable Integer id) {
+        boolean deleted = artService.deleteArt(id);
+        if (deleted) {
+            return ResponseEntity.ok("Art deleted successfully");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Art not found with ID: " + id);
+        }
+    }
+}

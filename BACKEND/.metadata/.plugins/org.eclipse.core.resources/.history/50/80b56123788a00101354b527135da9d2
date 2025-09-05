@@ -1,0 +1,32 @@
+package com.art.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.art.model.Art;
+import com.art.repository.ArtRepository;
+
+@Service
+public class ArtServiceImpl implements ArtService {
+
+	@Override
+	public Art addArt(Art art) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Art> viewArt() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String deleteArt(Integer id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}

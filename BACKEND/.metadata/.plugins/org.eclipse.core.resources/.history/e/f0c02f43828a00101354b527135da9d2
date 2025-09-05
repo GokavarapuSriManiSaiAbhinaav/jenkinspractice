@@ -1,0 +1,37 @@
+package com.art.service;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.art.model.Art;
+import com.art.repository.ArtRepository;
+
+@Service
+public class ArtServiceImpl implements ArtService {
+
+    @Autowired
+    private ArtRepository artRepository;
+
+    @Override
+    public Art addArt(Art art) {
+        return artRepository.save(art);
+    }
+
+    @Override
+    public List<Art> viewArt() {
+        return artRepository.findAll();
+    }
+
+    @Override
+    public boolean deleteArt(Integer id) {
+        Optional<Art> art = artRepository.findById(id);
+        if (art.isPresent()) {
+            artRepository.deleteById(id);
+            return true;
+        }
+        return false;
+    }
+}
